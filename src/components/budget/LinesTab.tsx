@@ -13,7 +13,7 @@ export function LinesTab({ lines, year }: { lines: BudgetLine[]; year: number })
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<Sort<"label" | "centre" | "cat" | "total">>({ key: "total", dir: -1 });
   const [draft, setDraft] = useState<Draft | null>(null);
-  const [newBudget, setNewBudget] = useState<{ year: string; centre: string; error?: string } | null>(null);
+  const [newBudget, setNewBudget] = useState<{ year: string; centre: string; error?: string | undefined } | null>(null);
   const [toDelete, setToDelete] = useState<BudgetLine | null>(null);
 
   const yearBudgets = budgets.filter((b) => b.year === year);
@@ -137,8 +137,8 @@ function LineDialog({ draft, budgets, onClose, onSave }: { draft: Draft; budgets
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const errs: Record<string, string> = {};
-    if (!d.label.trim()) errs.label = "Libellé obligatoire.";
-    if (!d.budgetId) errs.budgetId = "Budget obligatoire.";
+    if (!d.label.trim()) errs["label"] = "Libellé obligatoire.";
+    if (!d.budgetId) errs["budgetId"] = "Budget obligatoire.";
     const amounts = d.months.map((m) => parseAmount(m === "" ? "0" : m));
     amounts.forEach((a, i) => { if (a === null) errs[`m${i}`] = "Montant invalide"; });
     setErrors(errs);
@@ -159,7 +159,7 @@ function LineDialog({ draft, budgets, onClose, onSave }: { draft: Draft; budgets
             <Select label="Catégorie *" value={d.category} onChange={(e) => set({ category: e.target.value as Category })}>
               {CATEGORIES.map((c) => <option key={c.id} value={c.id}>{c.label} ({c.compte})</option>)}
             </Select>
-            <Field label="Libellé *" value={d.label} error={errors.label} onChange={(e) => set({ label: e.target.value })} />
+            <Field label="Libellé *" value={d.label} error={errors["label"]} onChange={(e) => set({ label: e.target.value })} />
           </div>
           <div>
             <div className="mb-2 flex items-center justify-between">
