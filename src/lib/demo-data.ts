@@ -16,7 +16,7 @@ export const kpis = [
 const months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct"];
 const rev = [4.1, 4.3, 4.7, 4.5, 4.9, 5.2, 4.6, 4.0, 5.1, 5.6];
 const prof = [0.52, 0.58, 0.66, 0.61, 0.72, 0.8, 0.63, 0.49, 0.74, 0.86];
-export const monthly = months.map((m, i) => ({ mois: m, ca: rev[i] * 1e6, resultat: prof[i] * 1e6 }));
+export const monthly = months.map((m, i) => ({ mois: m, ca: (rev[i] ?? 0) * 1e6, resultat: (prof[i] ?? 0) * 1e6 }));
 
 export const budgetVsActual = [
   { poste: "Ventes", budget: 50.0, reel: 48.6 },

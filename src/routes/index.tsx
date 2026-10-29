@@ -49,7 +49,7 @@ function Dashboard() {
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
         {kpis.map((k) => (
-          <KpiCard key={k.label} label={k.label} value={k.percent ? `${k.value.toLocaleString("fr-FR")} %` : formatMAD(k.value, true)} delta={k.delta} hint={k.hint} inverse={k.inverse} />
+          <KpiCard key={k.label} label={k.label} value={k.percent ? `${k.value.toLocaleString("fr-FR")} %` : formatMAD(k.value, true)} delta={k.delta} hint={k.hint} inverse={k.inverse ?? false} />
         ))}
       </div>
 
