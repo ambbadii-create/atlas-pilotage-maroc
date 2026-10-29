@@ -98,11 +98,11 @@ function ActionDialog({ action, lines, onClose, onSave }: { action: CorrectiveAc
           <Select label="Ligne budgétaire" value={a.lineId} onChange={(e) => set({ lineId: e.target.value })}>
             {lines.map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}
           </Select>
-          <Field label="Cause de l'écart *" value={a.cause} error={err.cause} onChange={(e) => set({ cause: e.target.value })} />
-          <Field label="Action corrective *" value={a.action} error={err.action} onChange={(e) => set({ action: e.target.value })} />
+          <Field label="Cause de l'écart *" value={a.cause} error={err["cause"]} onChange={(e) => set({ cause: e.target.value })} />
+          <Field label="Action corrective *" value={a.action} error={err["action"]} onChange={(e) => set({ action: e.target.value })} />
           <div className="grid grid-cols-2 gap-3">
-            <Field label="Responsable *" value={a.owner} error={err.owner} onChange={(e) => set({ owner: e.target.value })} />
-            <Field label="Échéance *" type="date" value={a.deadline} error={err.deadline} onChange={(e) => set({ deadline: e.target.value })} />
+            <Field label="Responsable *" value={a.owner} error={err["owner"]} onChange={(e) => set({ owner: e.target.value })} />
+            <Field label="Échéance *" type="date" value={a.deadline} error={err["deadline"]} onChange={(e) => set({ deadline: e.target.value })} />
           </div>
           <Select label="Statut" value={a.status} onChange={(e) => set({ status: e.target.value as ActionStatus })}>
             {STATUSES.map((s) => <option key={s}>{s}</option>)}
