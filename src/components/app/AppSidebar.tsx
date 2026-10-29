@@ -9,7 +9,7 @@ export function AppSidebar({ collapsed, onToggle }: { collapsed: boolean; onTogg
     <aside
       className={cn(
         "sticky top-0 flex h-screen shrink-0 flex-col bg-sidebar text-sidebar-foreground transition-[width] duration-200",
-        collapsed ? "w-[72px]" : "w-64",
+        collapsed ? "w-[72px]" : "w-72",
       )}
     >
       <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-4">
