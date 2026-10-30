@@ -57,10 +57,10 @@ export function buildDemo() {
       const month = String(m + 1).padStart(2, "0");
       const qty = Math.round(p.stock * (0.1 + r() * 0.12));
       if (qty > 0)
-        push({ date: `2026-${month}-${String(3 + Math.floor(r() * 24)).padStart(2, "0")}`, type: "sortie", productId: p.id, warehouseId: p.warehouseId, qty, unitCost: p.unitCost, doc: `BL-2026-${1000 + n}`, user: users[n % 3] });
+        push({ date: `2026-${month}-${String(3 + Math.floor(r() * 24)).padStart(2, "0")}`, type: "sortie", productId: p.id, warehouseId: p.warehouseId, qty, unitCost: p.unitCost, doc: `BL-2026-${1000 + n}`, user: users[n % 3]! });
       if (m % 3 === 2) {
         const qe = Math.round(p.max * (0.3 + r() * 0.2));
-        push({ date: `2026-${month}-25`, type: "entree", productId: p.id, warehouseId: p.warehouseId, qty: qe, unitCost: p.unitCost, doc: `FAC-2026-${2000 + n}`, user: users[n % 3] });
+        push({ date: `2026-${month}-25`, type: "entree", productId: p.id, warehouseId: p.warehouseId, qty: qe, unitCost: p.unitCost, doc: `FAC-2026-${2000 + n}`, user: users[n % 3]! });
       }
     }
   }
