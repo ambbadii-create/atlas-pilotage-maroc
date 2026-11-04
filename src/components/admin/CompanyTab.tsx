@@ -31,7 +31,7 @@ export function CompanyTab() {
     if (!eForm.name.trim()) return toast.error("Le nom de l'établissement est obligatoire.");
     upsertEstablishment({ ...eForm, id: editing?.id ?? uid("E"), companyId: company.id });
     toast.success(editing ? "Établissement modifié" : "Établissement créé");
-    setEditing(null);
+    closeEst();
   };
 
   return (
@@ -111,7 +111,8 @@ export function CompanyTab() {
         </div>
       </Panel>
 
-      <Modal open={editing !== null || eForm.name !== "" || undefined === undefined} onClose={() => { setEditing(null); setEForm({ name: "", type: "agence", adresse: "", ville: "", responsable: "" }); }} title={editing ? "Modifier l'établissement" : "Nouvel établissement"}>
+      <Modal open={estOpen} onClose={closeEst} title={editing ? "Modifier l'établissement" : "Nouvel établissement"}>
+
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Nom *" value={eForm.name} onChange={(e) => setEForm({ ...eForm, name: e.target.value })} className="sm:col-span-2" />
           <Select label="Type" value={eForm.type} onChange={(e) => setEForm({ ...eForm, type: e.target.value as EstablishmentType })}>
