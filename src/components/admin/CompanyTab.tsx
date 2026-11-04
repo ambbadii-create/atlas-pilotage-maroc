@@ -123,7 +123,7 @@ export function CompanyTab() {
           <Field label="Responsable" value={eForm.responsable ?? ""} onChange={(e) => setEForm({ ...eForm, responsable: e.target.value })} />
         </div>
         <div className="mt-5 flex justify-end gap-2">
-          <Btn variant="ghost" onClick={() => { setEditing(null); setEForm({ name: "", type: "agence", adresse: "", ville: "", responsable: "" }); }}>Annuler</Btn>
+          <Btn variant="ghost" onClick={closeEst}>Annuler</Btn>
           <Btn onClick={saveEst}>{editing ? "Enregistrer" : "Créer"}</Btn>
         </div>
       </Modal>
