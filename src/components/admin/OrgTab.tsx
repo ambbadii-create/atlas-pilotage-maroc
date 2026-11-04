@@ -12,7 +12,10 @@ export function OrgTab() {
   const [editing, setEditing] = useState<Department | null>(null);
   const [form, setForm] = useState<Omit<Department, "id"> | null>(null);
 
-  const managerName = (id?: string) => (id ? userFullName(users.find((u) => u.id === id) ?? ({ firstName: "—", lastName: "" } as never)) : "—");
+  const managerName = (id?: string) => {
+    const u = id ? users.find((x) => x.id === id) : undefined;
+    return u ? userFullName(u) : "—";
+  };
   const userCount = (id: string) => users.filter((u) => u.departmentId === id).length;
 
   const openNew = () => { setEditing(null); setForm({ name: "", parentId: undefined, managerId: undefined, costCenter: "" }); };

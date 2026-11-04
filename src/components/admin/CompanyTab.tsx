@@ -12,12 +12,12 @@ const typeLabel = (t: EstablishmentType) => ESTABLISHMENT_TYPES.find((x) => x.id
 export function CompanyTab() {
   const { companies, establishments, users, upsertCompany, upsertEstablishment, deleteEstablishment } = useAdmin();
   const company = companies[0];
-  const [form, setForm] = useState(company);
+  const [form, setForm] = useState<Company | null>(company ?? null);
   const [editing, setEditing] = useState<Establishment | null>(null);
   const [estOpen, setEstOpen] = useState(false);
   const [eForm, setEForm] = useState<Omit<Establishment, "id" | "companyId">>({ name: "", type: "agence", adresse: "", ville: "", responsable: "" });
 
-  if (!company) return null;
+  if (!company || !form) return null;
 
   const saveCompany = () => {
     upsertCompany(form);
