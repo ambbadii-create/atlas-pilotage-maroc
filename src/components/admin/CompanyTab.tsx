@@ -14,6 +14,7 @@ export function CompanyTab() {
   const company = companies[0];
   const [form, setForm] = useState(company);
   const [editing, setEditing] = useState<Establishment | null>(null);
+  const [estOpen, setEstOpen] = useState(false);
   const [eForm, setEForm] = useState<Omit<Establishment, "id" | "companyId">>({ name: "", type: "agence", adresse: "", ville: "", responsable: "" });
 
   if (!company) return null;
@@ -23,8 +24,9 @@ export function CompanyTab() {
     toast.success("Informations de l'entreprise enregistrées");
   };
 
-  const openNew = () => { setEditing(null); setEForm({ name: "", type: "agence", adresse: "", ville: "", responsable: "" }); };
-  const openEdit = (e: Establishment) => { const { id: _i, companyId: _c, ...rest } = e; setEForm(rest); setEditing(e); };
+  const closeEst = () => { setEstOpen(false); setEditing(null); setEForm({ name: "", type: "agence", adresse: "", ville: "", responsable: "" }); };
+  const openNew = () => { setEditing(null); setEForm({ name: "", type: "agence", adresse: "", ville: "", responsable: "" }); setEstOpen(true); };
+  const openEdit = (e: Establishment) => { const { id: _i, companyId: _c, ...rest } = e; setEForm(rest); setEditing(e); setEstOpen(true); };
   const saveEst = () => {
     if (!eForm.name.trim()) return toast.error("Le nom de l'établissement est obligatoire.");
     upsertEstablishment({ ...eForm, id: editing?.id ?? uid("E"), companyId: company.id });
